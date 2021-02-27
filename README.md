@@ -1,3 +1,7 @@
+# PoC - MySQL database support for Oqtane Blog Module
+
+This fork has been created as a complement to the work on cross platform database support to Oqtane Framework. The result of this effort can be seen at **[Oqtane.Framework - MySQL database support](https://github.com/pcancela/oqtane.framework/tree/oqtane-fake-2.0.1)** and **[Oqtane.Blogs - MySQL database support](https://github.com/pcancela/oqtane.blogs/tree/oqtane-blog-fake-1.0.3)**
+
 # Oqtane Blog Module
 
 Oqtane allows developers to create external modules which are rendered by the framework dynamically at run-time.
