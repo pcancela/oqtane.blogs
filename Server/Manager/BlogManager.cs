@@ -7,28 +7,34 @@ using Oqtane.Infrastructure;
 using Oqtane.Repository;
 using Oqtane.Blogs.Models;
 using Oqtane.Blogs.Repository;
+using Oqtane.Extensions;
+using Oqtane.Enums;
 
 namespace Oqtane.Blogs.Manager
 {
     public class BlogManager : IInstallable, IPortable
     {
         private IBlogRepository _Blogs;
-        private ISqlRepository _sql;
+        private IEnumerable<ISqlRepository> _sqlRepositories;
 
-        public BlogManager(IBlogRepository Blogs, ISqlRepository sql)
+        public BlogManager(IBlogRepository Blogs, IEnumerable<ISqlRepository> sqlRepositories)
         {
             _Blogs = Blogs;
-            _sql = sql;
+            _sqlRepositories = sqlRepositories;
         }
 
         public bool Install(Tenant tenant, string version)
         {
-            return _sql.ExecuteScript(tenant, GetType().Assembly, "Oqtane.Blogs." + version + ".sql");
+            var sqlType = tenant.DBSqlType.ToEnum<SqlType>();
+            var sql = _sqlRepositories.FirstOrDefault(r => r.GetSqlType() == sqlType);
+            return sql.ExecuteScript(tenant, GetType().Assembly, $"Oqtane.Blogs.{version}.sql");
         }
 
         public bool Uninstall(Tenant tenant)
         {
-            return _sql.ExecuteScript(tenant, GetType().Assembly, "Oqtane.Blogs.Uninstall.sql");
+            var sqlType = tenant.DBSqlType.ToEnum<SqlType>();
+            var sql = _sqlRepositories.FirstOrDefault(r => r.GetSqlType() == sqlType);
+            return sql.ExecuteScript(tenant, GetType().Assembly, $"Oqtane.Blogs.Uninstall.sql");
         }
 
         public string ExportModule(Module module)

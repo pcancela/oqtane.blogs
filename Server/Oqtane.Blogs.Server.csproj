@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Product>Oqtane.Blogs</Product>
     <Authors>Oqtane</Authors>
     <Company>Oqtane</Company>
@@ -14,8 +14,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Oqtane.Blogs.1.0.0.sql" />
-    <EmbeddedResource Include="Scripts\Oqtane.Blogs.Uninstall.sql" />
+    <None Remove="Scripts\LocalDB\Oqtane.Blogs.1.0.0.sql" />
+    <None Remove="Scripts\LocalDB\Oqtane.Blogs.Uninstall.sql" />
+    <None Remove="Scripts\MySQL\Oqtane.Blogs.1.0.0.sql" />
+    <None Remove="Scripts\MySQL\Oqtane.Blogs.Uninstall.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\LocalDB\Oqtane.Blogs.1.0.0.sql" />
+    <EmbeddedResource Include="Scripts\LocalDB\Oqtane.Blogs.Uninstall.sql" />
+    <EmbeddedResource Include="Scripts\MSSQL\Oqtane.Blogs.1.0.0.sql" />
+    <EmbeddedResource Include="Scripts\MSSQL\Oqtane.Blogs.Uninstall.sql" />
+    <EmbeddedResource Include="Scripts\MySQL\Oqtane.Blogs.1.0.0.sql" />
+    <EmbeddedResource Include="Scripts\MySQL\Oqtane.Blogs.Uninstall.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,14 +35,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Oqtane.Server" Version="2.0.1" />
+    <PackageReference Include="Oqtane.Shared" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Oqtane.Blogs.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Oqtane.Server" Version="2.0.0" />
-    <PackageReference Include="Oqtane.Shared" Version="2.0.0" />
   </ItemGroup>
 </Project>
